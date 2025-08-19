@@ -1,10 +1,9 @@
 .TodoItem {
     display: flex;
     gap: 20px;
-    padding-bottom: 20px;
+    padding: 10px 0;
     border-bottom: 1px solid #eee;
-    padding-top: 10px 0;
-
+    /* justify-content: space-between; */
 }
 
 .TodoItem.isCompleted {
@@ -17,35 +16,32 @@
 
 .TodoItem .date {
     font-size: 14px;
-    color: grey
+    color: gray;
 }
 
 .btn-wrap {
     display: flex;
     gap: 10px;
-
 }
 
-.TodoItem .button {
+.TodoItem button {
     cursor: pointer;
     font-size: 14px;
     border: none;
     border-radius: 5px;
     padding: 5px;
-    color: #fff;
+    color: #fff
 }
 
 .updateBtn {
     background-color: rgb(80, 223, 180);
-
 }
 
 .deleteBtn {
     background-color: rgb(255, 121, 112);
-
 }
 
-.TodoItem.TodoItem.isCompleted .content {
+.TodoItem.isCompleted .content {
     text-decoration: line-through;
     color: gray;
 }
