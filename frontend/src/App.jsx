@@ -54,7 +54,22 @@ function App() {
   }
 
 
+  const onDelete = async (id) => {
+    try {
+      if (!confirm("정말 삭제할까요 ?"))
+        return
+      const { data } = await axios.delete(`${API}${id}`)
+      if (Array.isArray(data?.todos)) {
+        setTodos(data.todos)
+        return
+      }
+      const deleteId = data?.deleteId ?? data?.todo?._id ?? data?._id ?? id
+      setTodos((prev) => prev.filter((t) => t._id !== deleteId))
 
+    } catch (error) {
+      console.error("삭제실패", error)
+    }
+  }
 
 
   return (
@@ -62,7 +77,7 @@ function App() {
       <Header />
       <TodoEditor onCreate={onCreate} />
 
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onDelete={onDelete} />
     </div>
   )
 }
