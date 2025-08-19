@@ -33,10 +33,35 @@ function App() {
     fetchTodos()
   }, [])
 
+  const onCreate = async (todoText) => {
+    if (!todoText.trim()) return
+
+    try {
+
+      const res = await axios.post(API, { text: todoText.trim() })
+
+      const created = res.data?.todo ?? res.data
+
+      if (Array.isArray(res.data?.todos)) {
+        setTodos(res.data.todos)
+      } else {
+        setTodos(prev => [created, ...prev])
+      }
+
+    } catch (error) {
+      console.log("추가 실패", error)
+    }
+  }
+
+
+
+
+
   return (
     <div className='App'>
       <Header />
-      <TodoEditor />
+      <TodoEditor onCreate={onCreate} />
+
       <TodoList todos={todos} />
     </div>
   )
