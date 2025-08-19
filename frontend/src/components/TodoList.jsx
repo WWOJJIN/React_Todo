@@ -1,20 +1,24 @@
 import React from 'react'
 import './TodoList.css'
 import TodoItem from './TodoItem'
-const TodoList = ({ todos }) => {
+
+const TodoList = ({ todos, onDelete }) => {
     return (
-        <div className='TodoList'>
-            <h4>Todo List 🌱</h4>
-            <input type="text" placeholder='검색어를 입력하세요' />
-            <div className="todos-wrapper">
-                {todos.map((todo, i) => (
+        <div className="TodoList">
+            <div className="todos_wrapper">
+                {todos.map((todo) => (
+                    <TodoItem
+                        key={todo._id}
+                        todo={todo}
 
-                    <TodoItem key={i} todo={todo} />
+
+                        onDelete={onDelete}
+                    />
                 ))}
-
             </div>
         </div>
-    )
-}
+    );
+};
+
 
 export default TodoList
