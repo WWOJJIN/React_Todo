@@ -65,7 +65,6 @@ function App() {
     }
   }
 
-
   const onUpdateChecked = async (id, next) => {
 
     try {
@@ -87,6 +86,7 @@ function App() {
     }
 
   }
+
   const onUpdateText = async (id, next) => {
     const value = next?.trim()
 
@@ -113,6 +113,35 @@ function App() {
 
   }
 
+  const onUpdate = async (id, next) => {
+    try {
+      const current = Array.isArray(todos) ? todos.find(t => t._id == id) : null
+      if (!current) throw new Error("해당 ID의 todo가 없습니다")
+
+      const { data } = await axios.put(`${API}/${id}`, next)
+
+      const updated = data?.updated ?? data?.todo ?? data;
+      setTodos(
+        prev => prev.map(t => (t._id === updated._id ? updated : t))
+      )
+    } catch (error) {
+      console.error("Todo update 실패", error)
+    }
+  }
+
+
+
+  const onUpdateTodo = async (id, next) => {
+    try {
+      await onUpdate(id, next)
+
+    } catch (error) {
+      console.error("Todo update 실패", error)
+
+    }
+  }
+
+
   return (
     <div className='App'>
       <Header />
@@ -120,7 +149,7 @@ function App() {
       <TodoList
         todos={Array.isArray(todos) ? todos : []}
         onUpdateChecked={onUpdateChecked}
-        onUpdateText={onUpdateText}
+        onUpdateTodo={onUpdateTodo}
         onDelete={onDelete} />
     </div>
   )

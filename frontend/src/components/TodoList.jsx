@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import './TodoList.css'
 import TodoItem from './TodoItem'
-const TodoList = ({ todos, onDelete, onUpdateChecked, onUpdateText }) => {
+const TodoList = ({ todos, onDelete, onUpdateChecked, onUpdateTodo }) => {
 
     const [q, setQ] = useState(``)
     const filtered = useMemo(() => {
@@ -25,7 +25,7 @@ const TodoList = ({ todos, onDelete, onUpdateChecked, onUpdateText }) => {
                         key={i}
                         todo={todo}
                         onUpdateChecked={onUpdateChecked}
-                        onUpdateText={onUpdateText}
+                        onUpdateTodo={onUpdateTodo}
                         onDelete={onDelete} />
                 ))}
 
