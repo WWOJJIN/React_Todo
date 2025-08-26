@@ -8,6 +8,7 @@ dotenv.config(); // .env의 MONGO_URI, PORT 등 로드
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cookieParser()); // ★ 쿠키 파싱
 app.use(cors({
     origin: process.env.FRONT_ORIGIN,
     credentials: true
